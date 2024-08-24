@@ -1,0 +1,47 @@
+@import "theme.scss";
+
+// Font imports
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+
+// General Theming
+
+body {
+  background: url("https://steamuserimages-a.akamaihd.net/ugc/2047499235120424574/3FDE3E37D52036870C3FDBC427A43BBC4DB17E38/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false")
+    no-repeat center center fixed;
+  color: $text;
+
+  // Apply DM Sans
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  min-height: 100%;
+}
+
+* {
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+html {
+  height: 100%;
+}
+
+.secondary-text {
+  opacity: 0.7;
+}
+
+hr {
+  //   border-top: 1px solid black;
+  border: none;
+  border-top: 1px solid $dark;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+em {
+  font-weight: bold;
+  color: gold;
+}
