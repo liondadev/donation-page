@@ -5,6 +5,7 @@
   import toastr from "toastr";
 
   import logo from "./assets/img/np_logo.svg";
+  import dollarSign from "./assets/icon/fa/dollar-sign.svg";
 
   function priceToPoints(amt: number): number {
     return amt * 100;
@@ -27,12 +28,13 @@
 
   const servers = ["DarkRP 1", "DarkRP 2", "DarkRP 3", "DarkRP 4"];
   async function completePurchase(realMoneyAmount: number) {
-    const html = `You will pay ${moneyFormatter.format(realMoneyAmount)} for ${formatPoints(priceToPoints(realMoneyAmount))}`;
+    const html = `You will pay <em>${moneyFormatter.format(realMoneyAmount)}</em> for <em>${formatPoints(priceToPoints(realMoneyAmount))}</em>`;
     const confirmPopup = await Swal.fire({
       title: "Confirm your purchase",
       html: html,
       icon: "question",
       showCancelButton: true,
+      confirmButtonColor: "var(--accent)",
     });
 
     if (!confirmPopup.isConfirmed) return;
@@ -93,11 +95,20 @@
             style="flex-grow: 1;"
             active={amt == selectedAmount}
             on:click={() => (selectedAmount = amt)}
-            >{moneyFormatter.format(amt)}<br />{formatPoints(
-              priceToPoints(amt)
-            )}</Button
+            ><em>{formatPoints(priceToPoints(amt))}</em><br /><small
+              >{moneyFormatter.format(amt)}</small
+            ></Button
           >
         {/each}
+      </div>
+
+      <div class="input-group">
+        <img src={dollarSign} alt="dollar sign icon" />
+        <input
+          class="suggestion-input"
+          type="number"
+          bind:value={selectedAmount}
+        />
       </div>
 
       <hr />
@@ -120,7 +131,7 @@
   @import "./assets/css/theme.scss";
 
   .outer-content {
-    min-width: 100%;
+    width: 100%;
     min-height: 100vh;
     background-color: rgba(20, 20, 20, 0.5);
     backdrop-filter: blur(5px);
@@ -135,9 +146,13 @@
       background: $card-bg;
       border-radius: $border-rad;
       overflow: hidden;
-      max-width: 50%;
+      max-width: 75%;
 
       filter: drop-shadow(0 0 0.25rem black);
+
+      @media (max-width: 1080px) {
+        max-width: 90vw;
+      }
 
       .topbar {
         background: $accent;
@@ -222,8 +237,62 @@
           display: flex;
           flex-direction: row;
           margin-top: 0.5rem;
+
+          @media (max-width: 600px) {
+            flex-direction: column;
+          }
+        }
+
+        .input-group {
+          display: flex;
+          flex-direction: row;
+          gap: 0.5rem;
+
+          margin-top: 1rem;
+          background: $background;
+          border: none;
+          border-radius: $border-rad;
+          padding: 0.5rem;
+          font-size: 1.15rem;
+          color: $text;
+          width: 100%;
+          box-sizing: border-box;
+
+          &:focus-within {
+            outline: 1px solid #ffffff28;
+          }
+
+          input {
+            background: none;
+            border: none;
+            color: $text;
+            font-size: 1.15rem;
+            height: 100%;
+            box-sizing: border-box;
+            width: 100%;
+
+            &:focus {
+              outline: none;
+            }
+          }
+
+          img {
+            height: 100%;
+            width: 1rem;
+            color: white;
+            fill: white;
+            filter: invert(84%) sepia(99%) saturate(7475%) hue-rotate(180deg)
+              brightness(131%) contrast(100%);
+            opacity: 0.7;
+          }
         }
       }
+    }
+  }
+
+  :global(.btn.active) {
+    :global(em) {
+      color: $text;
     }
   }
 </style>

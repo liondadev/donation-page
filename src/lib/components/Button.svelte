@@ -25,7 +25,7 @@
     }
 
     &.rounded {
-      border-radius: 0.15rem;
+      border-radius: $border-rad;
     }
   }
 </style>

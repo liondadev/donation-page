@@ -3,8 +3,12 @@ $background: #2b2b2b;
 $text: #f5f5f5;
 $card-bg: #1d1d1d;
 $dark: #0e0e0e;
-$accent: #18c03c;
+$accent: #2e8b57;
 $title: white;
 
 // General Radius
-$border-rad: 0.25rem;
+$border-rad: 0.5rem;
+
+:root {
+  --accent: #{$accent};
+}
